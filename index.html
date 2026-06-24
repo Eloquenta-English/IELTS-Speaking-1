@@ -239,7 +239,10 @@ body {
 <header class="header">
   <h1>IELTS Speaking Practice</h1>
   <p>Master all three parts of the IELTS Speaking test with model answers you can reveal when ready. Track your progress as you practice.</p>
-  <span class="level-badge level-b1">B1 Level</span>
+  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap;">
+    <span class="level-badge level-b1">B1 Level</span>
+    <button id="installBtn" style="background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.5);color:#22d3ee;font-family:'Inter',sans-serif;font-size:0.85rem;padding:8px 20px;border-radius:24px;cursor:pointer;font-weight:600;display:none;" onclick="installApp()">&#11015; Install App</button>
+  </div>
 </header>
 
 <div class="container">
@@ -486,6 +489,26 @@ if ('serviceWorker' in navigator) {
       .then(reg => console.log('SW registered:', reg.scope))
       .catch(err => console.log('SW registration failed:', err));
   });
+}
+
+// PWA Install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.style.display = 'inline-block';
+});
+
+async function installApp() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') {
+    const btn = document.getElementById('installBtn');
+    if (btn) { btn.textContent = '✓ Installed'; btn.disabled = true; btn.style.borderColor = 'var(--lime)'; btn.style.color = 'var(--lime)'; }
+  }
+  deferredPrompt = null;
 }
 </script>
 
