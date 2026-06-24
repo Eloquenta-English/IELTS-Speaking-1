@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a1020">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="IELTS Speaking Practice — Band B1 with model answers">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%230a1020'/><text x='96' y='120' font-size='100' text-anchor='middle' fill='%2322d3ee'>W</text></svg>">
+<title>WTE IELTS Speaking</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a1020;
+  --card-bg: rgba(15, 23, 42, 0.85);
+  --border: rgba(251, 191, 36, 0.4);
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #fbbf24;
+  --cyan: #22d3ee;
+  --lime: #a3e635;
+  --rose: #fb7185;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 30px;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(34, 211, 238, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(251, 191, 36, 0.06) 0%, transparent 50%);
+}
+
+.header {
+  text-align: center;
+  padding: 30px 30px 24px;
+  border-bottom: 1px solid rgba(251, 191, 36, 0.15);
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  background: linear-gradient(135deg, #fbbf24, #f472b6, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.4em;
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.level-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 1em;
+}
+
+.level-b1 { background: rgba(163, 230, 53, 0.2); color: var(--lime); border: 1px solid rgba(163, 230, 53, 0.4); }
+.level-b2 { background: rgba(34, 211, 238, 0.2); color: var(--cyan); border: 1px solid rgba(34, 211, 238, 0.4); }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px 30px;
+}
+
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin: 30px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.deck-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 10px 0;
+}
+
+.deck-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.deck-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.15), 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.deck-card.completed {
+  border-color: var(--lime);
+  box-shadow: 0 0 20px rgba(163, 230, 53, 0.15);
+}
+
+.deck-card-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  position: relative;
+}
+
+.deck-card-image-placeholder {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.deck-card-image-placeholder .placeholder-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.deck-card-body {
+  padding: 20px 24px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.deck-card-tags {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tag-part1 { background: rgba(251, 191, 36, 0.15); color: var(--accent); }
+.tag-part2 { background: rgba(34, 211, 238, 0.15); color: var(--cyan); }
+.tag-part3 { background: rgba(251, 113, 133, 0.15); color: var(--rose); }
+
+.deck-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.deck-card p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.deck-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.deck-card-progress {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.deck-card-progress.done {
+  color: var(--lime);
+}
+
+.completed-badge {
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(163, 230, 53, 0.2);
+  color: var(--lime);
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body { padding: 16px; }
+  .deck-grid { grid-template-columns: 1fr; }
+  .header { padding: 20px 16px 16px; }
+  .container { padding: 0 10px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>IELTS Speaking Practice</h1>
+  <p>Master all three parts of the IELTS Speaking test with model answers you can reveal when ready. Track your progress as you practice.</p>
+  <span class="level-badge level-b1">B1 Level</span>
+</header>
+
+<div class="container">
+
+  <h2 class="section-title">Batch 1 — Core Topics</h2>
+  <div class="deck-grid" id="deckGrid">
+
+    <a class="deck-card" href="hobbies-free-time.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=70" alt="Hobbies" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#127925;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Hobbies &amp; Free Time</h3>
+        <p>Talk about what you do for fun, how often you do it, and why it matters to you.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-hobbies-free-time">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-hobbies-free-time">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="travel-holidays.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=70" alt="Travel" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#9992;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Travel &amp; Holidays</h3>
+        <p>Discuss places you've visited, dream destinations, and how travel changes you.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-travel-holidays">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-travel-holidays">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="work-studies.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=70" alt="Work" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#128188;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Work &amp; Studies</h3>
+        <p>Talk about your job or studies, daily routines, and future career plans.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-work-studies">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-work-studies">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="food-cooking.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=70" alt="Food" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#127859;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Food &amp; Cooking</h3>
+        <p>Describe your favourite dishes, eating habits, and food culture.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-food-cooking">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-food-cooking">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="technology-social-media.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=70" alt="Technology" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#128187;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Technology &amp; Social Media</h3>
+        <p>Discuss how you use tech daily, its impact on life, and digital habits.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-technology-social-media">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-technology-social-media">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="health-fitness.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=70" alt="Fitness" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#127939;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Health &amp; Fitness</h3>
+        <p>Talk about exercise routines, healthy lifestyle, and staying active.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-health-fitness">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-health-fitness">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="environment-nature.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&q=70" alt="Nature" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#127795;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Environment &amp; Nature</h3>
+        <p>Discuss nature, environmental issues, and your relationship with the outdoors.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-environment-nature">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-environment-nature">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="friends-family.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=70" alt="Friends" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#128100;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Friends &amp; Family</h3>
+        <p>Talk about your relationships, people you admire, and social life.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-friends-family">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-friends-family">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="music-entertainment.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=70" alt="Music" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#127926;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Music &amp; Entertainment</h3>
+        <p>Discuss music tastes, concerts, movies, and what you do in your downtime.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-music-entertainment">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-music-entertainment">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="deck-card" href="daily-routine.html">
+      <div class="deck-card-image-placeholder">
+        <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=400&q=70" alt="Daily Routine" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder-overlay" style="display:none;">&#128338;</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent, rgba(0,0,0,0.7));">
+          <span class="tag tag-part1">Part 1</span>
+          <span class="tag tag-part2">Part 2</span>
+          <span class="tag tag-part3">Part 3</span>
+        </div>
+      </div>
+      <div class="deck-card-body">
+        <h3>Daily Routine &amp; Time</h3>
+        <p>Describe your typical day, time management, and how you balance life.</p>
+        <div class="deck-card-footer">
+          <span class="deck-card-progress" id="progress-daily-routine-time">Not started</span>
+          <span class="completed-badge" style="display:none" id="done-daily-routine-time">&#10003; Done</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+
+// Progress tracking
+const decks = [
+  'hobbies-free-time', 'travel-holidays', 'work-studies', 'food-cooking',
+  'technology-social-media', 'health-fitness', 'environment-nature',
+  'friends-family', 'music-entertainment', 'daily-routine-time'
+];
+
+function loadProgress() {
+  try {
+    const data = JSON.parse(localStorage.getItem('ielts-speaking-progress') || '{}');
+    decks.forEach(id => {
+      if (data[id] && data[id].completed) {
+        const card = document.querySelector('a[href="' + id + '"]');
+        if (card) {
+          card.classList.add('completed');
+          const prog = document.getElementById('progress-' + id);
+          const done = document.getElementById('done-' + id);
+          if (prog) { prog.textContent = 'Completed'; prog.classList.add('done'); }
+          if (done) done.style.display = 'inline-block';
+        }
+      }
+    });
+  } catch(e) {}
+}
+loadProgress();
+
+// Register service worker for offline PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('SW registered:', reg.scope))
+      .catch(err => console.log('SW registration failed:', err));
+  });
+}
+</script>
+
+</body>
+</html>
