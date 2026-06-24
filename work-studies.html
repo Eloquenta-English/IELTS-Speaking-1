@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<title>WTE IELTS Speaking</title>
+<style>
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Inter-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/Inter-Medium.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Inter-SemiBold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/Inter-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/Montserrat-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./fonts/Montserrat-Black.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/Oswald-Medium.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Oswald-SemiBold.woff2') format('woff2');
+  font-display: swap;
+}
+</style>
+<style>
+:root {
+  --bg: #0a1020;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #fbbf24;
+  --cyan: #22d3ee;
+  --lime: #a3e635;
+  --rose: #fb7185;
+  --purple: #a78bfa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4vh 6vw;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  overflow-y: auto;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 2;
+}
+
+.slide:not(.active) * { visibility: hidden !important; }
+
+/* Background */
+.slide-bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px);
+  z-index: 0;
+}
+
+.slide-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 16, 32, 0.88) 0%, rgba(10, 16, 32, 0.75) 100%);
+  z-index: 1;
+}
+
+/* Title slide */
+.title-slide {
+  justify-content: flex-start;
+  padding-top: calc(5vh + 150px);
+}
+
+.title-box {
+  background: rgba(10, 16, 32, 0.92);
+  border: 2px solid rgba(251, 191, 36, 0.5);
+  border-radius: 18px;
+  padding: 1.5em 3em;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.2), 0 0 60px rgba(34, 211, 238, 0.1);
+  backdrop-filter: blur(8px);
+  margin-bottom: 1.5em;
+}
+
+.title-box h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  background: linear-gradient(135deg, #fbbf24, #f472b6, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-box .level-badge {
+  display: inline-block;
+  margin-top: 0.6em;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(163, 230, 53, 0.2);
+  color: var(--lime);
+  border: 1px solid rgba(163, 230, 53, 0.4);
+}
+
+.subtitle {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 1em;
+}
+
+/* Glow boxes */
+.glow-box {
+  background: rgba(10, 16, 32, 0.92);
+  border: 2px solid rgba(251, 191, 36, 0.5);
+  border-radius: 18px;
+  padding: 1.8em 2.4em;
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.15), 0 0 60px rgba(34, 211, 238, 0.1), 0 20px 60px rgba(0, 0, 0, 0.4);
+  max-width: 780px;
+  width: 100%;
+  margin: 0.8em 0;
+  backdrop-filter: blur(8px);
+}
+
+.glow-box.cyan { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 30px rgba(34, 211, 238, 0.15), 0 0 60px rgba(34, 211, 238, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4); }
+.glow-box.rose { border-color: rgba(251, 113, 133, 0.5); box-shadow: 0 0 30px rgba(251, 113, 133, 0.15), 0 0 60px rgba(251, 113, 133, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4); }
+.glow-box.lime { border-color: rgba(163, 230, 53, 0.5); box-shadow: 0 0 30px rgba(163, 230, 53, 0.15), 0 0 60px rgba(163, 230, 53, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4); }
+.glow-box.purple { border-color: rgba(167, 139, 250, 0.5); box-shadow: 0 0 30px rgba(167, 139, 250, 0.15), 0 0 60px rgba(167, 139, 250, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4); }
+
+/* Part labels */
+.part-label {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.6em;
+}
+
+.part-1 .part-label { color: var(--accent); }
+.part-2 .part-label { color: var(--cyan); }
+.part-3 .part-label { color: var(--rose); }
+
+/* Questions */
+.question {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin-bottom: 0.8em;
+  color: var(--text);
+}
+
+.question-number {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 0.3em;
+}
+
+/* Reveal buttons */
+.reveal-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.6em 0;
+}
+
+.reveal-btn:hover {
+  background: rgba(251, 191, 36, 0.2);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
+.reveal-btn.revealed {
+  background: rgba(163, 230, 53, 0.15);
+  border-color: var(--lime);
+  color: var(--lime);
+}
+
+.answer-box {
+  display: none;
+  margin-top: 0.8em;
+  padding: 1em 1.3em;
+  background: rgba(163, 230, 53, 0.08);
+  border: 1px solid rgba(163, 230, 53, 0.25);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #d1fae5;
+}
+
+.answer-box strong {
+  color: var(--lime);
+}
+
+.answer-box.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cue card */
+.cue-card {
+  background: rgba(34, 211, 238, 0.08);
+  border: 2px solid rgba(34, 211, 238, 0.4);
+  border-radius: 16px;
+  padding: 1.5em 2em;
+  margin: 1em 0;
+}
+
+.cue-card h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: 0.6em;
+  font-size: 1.1rem;
+}
+
+.cue-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cue-card li {
+  padding: 0.4em 0;
+  padding-left: 1.5em;
+  position: relative;
+  line-height: 1.5;
+}
+
+.cue-card li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+/* Navigation */
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8em 2em;
+  background: rgba(10, 16, 32, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+}
+
+.nav-btn {
+  padding: 8px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.slide-counter {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  position: fixed;
+  bottom: 52px;
+  left: 0;
+  z-index: 10;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--cyan), var(--lime));
+  box-shadow: 0 0 10px var(--accent);
+  transition: width 0.4s ease;
+}
+
+/* Home link */
+.home-link {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 20;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(10, 16, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.home-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slide { padding: 3vh 4vw; }
+  .glow-box { padding: 1.3em 1.5em; }
+  .title-box { padding: 1em 1.5em; }
+  .nav-bar { padding: 0.6em 1em; }
+}
+</style>
+</head>
+<body>
+
+<a class="home-link" href="index.html">&larr; Back to Portal</a>
+
+
+<div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80')"></div>
+<div class="slide-overlay"></div>
+
+<!-- Slide 1: Title -->
+<div class="slide active" data-slide="0">
+  <div class="title-slide">
+    <div class="title-box">
+      <h1>Work &amp; Studies</h1>
+      <span class="level-badge">IELTS Speaking &mdash; B1</span>
+    </div>
+    <p class="subtitle">Practice all three parts</p>
+  </div>
+</div>
+
+
+<!-- Slide 3: Part 1 Q1 -->
+<div class="slide" data-slide="2">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 1</div>
+    <div class="question">What subject are you studying / What do you do for work?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      I'm currently studying English and Business at school. I'm in my final year, and I'm hoping to go to university afterwards to study International Relations. I think it's important to learn about how countries interact, especially in today's globalised world.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 4: Part 1 Q2 -->
+<div class="slide" data-slide="3">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 2</div>
+    <div class="question">What do you enjoy most about your studies/job?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      What I enjoy most about my studies is that I get to explore topics that really interest me — like how different cultures communicate and solve problems. I also love the discussions we have in class, because everyone brings a different perspective. It's much more engaging than just memorising facts from a textbook.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Part 1 Q3 -->
+<div class="slide" data-slide="4">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 3</div>
+    <div class="question">What job would you like to do in the future?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      In the future, I'd like to work in diplomacy or international development — maybe for an organisation like the UN or an NGO. I think it would be incredibly rewarding to work on projects that make a real difference in people's lives. I know it's competitive, but I'm willing to put in the effort to get there.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 6: Part 2 Instructions -->
+<div class="slide" data-slide="5">
+  <div class="glow-box part-2">
+    <div class="part-label">&#9670; Part 2 — Long Turn (3-4 min)</div>
+    <p style="font-size:1.05rem;line-height:1.6">You will receive a cue card with a topic. You have 1 minute to prepare, then speak for 1-2 minutes.</p>
+    <p style="margin-top:0.8em;font-size:0.92rem;color:var(--text-muted);line-height:1.5"><strong style="color:var(--cyan);">Tip:</strong> Use all the prompts on the card. Structure your answer: past → present → future. Don't memorise scripted answers — examiners can tell.</p>
+  </div>
+</div>
+
+<!-- Slide 7: Part 2 Cue Card -->
+<div class="slide" data-slide="6">
+  <div class="glow-box part-2">
+    <div class="part-label">&#9670; Part 2 — Cue Card</div>
+    <div class="cue-card">
+      <h4>A Job You Would Like to Do</h4>
+      <p style="margin-bottom:0.8em;color:var(--text);line-height:1.5">Describe a job you would like to do. You should say:</p>
+      <ul>
+        <li>What the job is</li>
+        <li>What skills it requires</li>
+        <li>Why it interests you</li>
+        <li>What you would need to do to get it</li>
+      </ul>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      A job I would really love to do in the future is working as a travel journalist. Essentially, you travel to different countries and write articles or create content about the places you visit — the culture, the food, the people you meet.<br><br>This job interests me because it combines two things I'm passionate about: writing and exploring new places. I think I'd thrive in a role that allows me to be creative and experience different cultures at the same time.<br><br>To get into this field, I think I'd need strong writing skills, obviously, but also photography and video editing skills. I'd probably need to build a portfolio by starting a blog or contributing to smaller travel magazines. I think the most important thing would be persistence — it's a competitive industry, so you have to keep pitching ideas and building connections.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 8: Part 3 Instructions -->
+<div class="slide" data-slide="7">
+  <div class="glow-box part-3">
+    <div class="part-label">&#9670; Part 3 — Discussion (4-5 min)</div>
+    <p style="font-size:1.05rem;line-height:1.6">The examiner asks more abstract, in-depth questions related to the Part 2 topic.</p>
+    <p style="margin-top:0.8em;font-size:0.92rem;color:var(--text-muted);line-height:1.5"><strong style="color:var(--rose);">Tip:</strong> Give balanced opinions. Acknowledge both sides before giving your own view. Use phrases like "On one hand... on the other hand..." or "Some people argue that... but I believe..."</p>
+  </div>
+</div>
+
+<!-- Slide 8: Part 3 Q1 -->
+<div class="slide" data-slide="7">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 1</div>
+    <div class="question">Is it better to study at university or learn through work experience?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      I think both have their value, and ideally you'd have a combination of the two. University provides a strong theoretical foundation and critical thinking skills that are hard to develop on your own. However, work experience teaches you practical skills — how to work in a team, deal with real deadlines, manage pressure. Personally, I think the best approach is to study first and then apply what you've learned through internships or jobs.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: Part 3 Q2 -->
+<div class="slide" data-slide="8">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 2</div>
+    <div class="question">How has technology changed the way people work in your country?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      Technology has transformed the workplace in so many ways. Remote working has become completely normal — especially since the pandemic — and now many people can do their jobs from anywhere. Communication tools like video calls and instant messaging have made it easier to collaborate with colleagues across the country or even internationally. On the downside, I think technology has also blurred the line between work and personal life — people feel pressure to answer emails or messages even outside working hours.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Part 3 Q3 -->
+<div class="slide" data-slide="9">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 3</div>
+    <div class="question">Do you think people will change jobs more often in the future?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      Yes, I definitely think so. The traditional model of staying with one company for your entire career is already disappearing. People today want variety, growth opportunities, and flexibility — and if a job doesn't offer that, they'll move on. I also think the gig economy and freelance work will become more common, which means people will have multiple income sources rather than relying on a single employer. It's both exciting and a bit uncertain.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 12: Summary / Exam Tip -->
+<div class="slide" data-slide="11">
+  <div class="glow-box lime">
+    <div class="part-label" style="color:var(--lime);">&#10003; Key Takeaways</div>
+    <ul style="list-style:none;padding:0;line-height:2.2;font-size:1rem;">
+      <li>&#10003; <strong>Part 1:</strong> Extend your answers — give reasons + examples</li>
+      <li>&#10003; <strong>Part 2:</strong> Use all cue card prompts, structure chronologically</li>
+      <li>&#10003; <strong>Part 3:</strong> Balance both sides before giving your opinion</li>
+      <li>&#10003; <strong>Golden rule:</strong> Be specific and personal — avoid generic answers</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="nav-bar">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">&larr; Previous</button>
+  <span class="slide-counter" id="slideCounter">1 / 12</span>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next &rarr;</button>
+</div>
+
+<script>
+let current = 0;
+const total = document.querySelectorAll('.slide').length;
+
+function showSlide(n) {
+  if (n < 0 || n >= total) return;
+  document.querySelectorAll('.slide')[current].classList.remove('active');
+  current = n;
+  document.querySelectorAll('.slide')[current].classList.add('active');
+  document.getElementById('slideCounter').textContent = `${current + 1} / ${total}`;
+  document.getElementById('progressFill').style.width = `${((current + 1) / total) * 100}%`;
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === total - 1;
+}
+
+function changeSlide(dir) {
+  showSlide(current + dir);
+}
+
+function toggleAnswer(btn) {
+  const answer = btn.nextElementSibling;
+  answer.classList.toggle('visible');
+  btn.classList.toggle('revealed');
+  btn.textContent = btn.classList.contains('revealed') ? 'Hide Answer' : 'Show Model Answer';
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+});
+
+// Mark complete on last slide
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (current === total - 1) {
+    const data = JSON.parse(localStorage.getItem('ielts-speaking-progress') || '{}');
+    data['work-studies'] = { completed: true, date: new Date().toISOString().split('T')[0] };
+    localStorage.setItem('ielts-speaking-progress', JSON.stringify(data));
+  }
+});
+
+// Mark as visited
+(function() {
+  const data = JSON.parse(localStorage.getItem('ielts-speaking-progress') || '{}');
+  if (!data['work-studies']) {
+    data['work-studies'] = { completed: false, started: new Date().toISOString().split('T')[0] };
+    localStorage.setItem('ielts-speaking-progress', JSON.stringify(data));
+  }
+})();
+
+showSlide(0);
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
