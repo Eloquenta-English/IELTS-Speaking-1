@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<title>WTE IELTS Speaking</title>
+<style>
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Inter-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/Inter-Medium.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Inter-SemiBold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/Inter-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/Montserrat-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./fonts/Montserrat-Black.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/Oswald-Medium.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Oswald-SemiBold.woff2') format('woff2');
+  font-display: swap;
+}
+</style>
+<style>
+:root {
+  --bg: #0a1020;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #fbbf24;
+  --cyan: #22d3ee;
+  --lime: #a3e635;
+  --rose: #fb7185;
+  --purple: #a78bfa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4vh 6vw;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  overflow-y: auto;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 2;
+}
+
+.slide:not(.active) * { visibility: hidden !important; }
+
+/* Background */
+.slide-bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px);
+  z-index: 0;
+}
+
+.slide-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 16, 32, 0.88) 0%, rgba(10, 16, 32, 0.75) 100%);
+  z-index: 1;
+}
+
+/* Title slide */
+.title-slide {
+  justify-content: flex-start;
+  padding-top: calc(5vh + 150px);
+}
+
+.title-box {
+  background: rgba(10, 16, 32, 0.92);
+  border: 2px solid rgba(251, 191, 36, 0.5);
+  border-radius: 18px;
+  padding: 1.5em 3em;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.2), 0 0 60px rgba(34, 211, 238, 0.1);
+  backdrop-filter: blur(8px);
+  margin-bottom: 1.5em;
+}
+
+.title-box h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  background: linear-gradient(135deg, #fbbf24, #f472b6, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-box .level-badge {
+  display: inline-block;
+  margin-top: 0.6em;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(163, 230, 53, 0.2);
+  color: var(--lime);
+  border: 1px solid rgba(163, 230, 53, 0.4);
+}
+
+.subtitle {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 1em;
+}
+
+/* Glow boxes */
+.glow-box {
+  background: rgba(10, 16, 32, 0.92);
+  border: 2px solid rgba(251, 191, 36, 0.5);
+  border-radius: 18px;
+  padding: 1.8em 2.4em;
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.15), 0 0 60px rgba(34, 211, 238, 0.1), 0 20px 60px rgba(0, 0, 0, 0.4);
+  max-width: 780px;
+  width: 100%;
+  margin: 0.8em 0;
+  backdrop-filter: blur(8px);
+}
+
+.glow-box.cyan { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 30px rgba(34, 211, 238, 0.15), 0 0 60px rgba(34, 211, 238, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4); }
+.glow-box.rose { border-color: rgba(251, 113, 133, 0.5); box-shadow: 0 0 30px rgba(251, 113, 133, 0.15), 0 0 60px rgba(251, 113, 133, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4); }
+.glow-box.lime { border-color: rgba(163, 230, 53, 0.5); box-shadow: 0 0 30px rgba(163, 230, 53, 0.15), 0 0 60px rgba(163, 230, 53, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4); }
+.glow-box.purple { border-color: rgba(167, 139, 250, 0.5); box-shadow: 0 0 30px rgba(167, 139, 250, 0.15), 0 0 60px rgba(167, 139, 250, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4); }
+
+/* Part labels */
+.part-label {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.6em;
+}
+
+.part-1 .part-label { color: var(--accent); }
+.part-2 .part-label { color: var(--cyan); }
+.part-3 .part-label { color: var(--rose); }
+
+/* Questions */
+.question {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin-bottom: 0.8em;
+  color: var(--text);
+}
+
+.question-number {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 0.3em;
+}
+
+/* Reveal buttons */
+.reveal-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.6em 0;
+}
+
+.reveal-btn:hover {
+  background: rgba(251, 191, 36, 0.2);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
+.reveal-btn.revealed {
+  background: rgba(163, 230, 53, 0.15);
+  border-color: var(--lime);
+  color: var(--lime);
+}
+
+.answer-box {
+  display: none;
+  margin-top: 0.8em;
+  padding: 1em 1.3em;
+  background: rgba(163, 230, 53, 0.08);
+  border: 1px solid rgba(163, 230, 53, 0.25);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #d1fae5;
+}
+
+.answer-box strong {
+  color: var(--lime);
+}
+
+.answer-box.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cue card */
+.cue-card {
+  background: rgba(34, 211, 238, 0.08);
+  border: 2px solid rgba(34, 211, 238, 0.4);
+  border-radius: 16px;
+  padding: 1.5em 2em;
+  margin: 1em 0;
+}
+
+.cue-card h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: 0.6em;
+  font-size: 1.1rem;
+}
+
+.cue-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cue-card li {
+  padding: 0.4em 0;
+  padding-left: 1.5em;
+  position: relative;
+  line-height: 1.5;
+}
+
+.cue-card li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+/* Navigation */
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8em 2em;
+  background: rgba(10, 16, 32, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+}
+
+.nav-btn {
+  padding: 8px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.slide-counter {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  position: fixed;
+  bottom: 52px;
+  left: 0;
+  z-index: 10;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--cyan), var(--lime));
+  box-shadow: 0 0 10px var(--accent);
+  transition: width 0.4s ease;
+}
+
+/* Home link */
+.home-link {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 20;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(10, 16, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.home-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slide { padding: 3vh 4vw; }
+  .glow-box { padding: 1.3em 1.5em; }
+  .title-box { padding: 1em 1.5em; }
+  .nav-bar { padding: 0.6em 1em; }
+}
+</style>
+</head>
+<body>
+
+<a class="home-link" href="index.html">&larr; Back to Portal</a>
+
+
+<div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80')"></div>
+<div class="slide-overlay"></div>
+
+<!-- Slide 1: Title -->
+<div class="slide active" data-slide="0">
+  <div class="title-slide">
+    <div class="title-box">
+      <h1>Food &amp; Cooking</h1>
+      <span class="level-badge">IELTS Speaking &mdash; B1</span>
+    </div>
+    <p class="subtitle">Practice all three parts</p>
+  </div>
+</div>
+
+
+<!-- Slide 3: Part 1 Q1 -->
+<div class="slide" data-slide="2">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 1</div>
+    <div class="question">What's your favourite food?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      My favourite food is definitely Wiener Schnitzel — it's a traditional Austrian dish made from veal that's breaded and fried until it's golden and crispy. We usually eat it with potato salad or fries. It reminds me of home because my grandmother used to make it every Sunday for the whole family.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 4: Part 1 Q2 -->
+<div class="slide" data-slide="3">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 2</div>
+    <div class="question">Do you know how to cook? What dish can you make?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      Yes, I'd say I'm a decent cook! I can make quite a few dishes now — I taught myself mostly from YouTube videos and by watching my parents. My signature dish is probably pasta carbonara — it's simple but you need good timing to get the egg mixture right without scrambling it. I also make a pretty good apple strudel, which is another Austrian classic.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Part 1 Q3 -->
+<div class="slide" data-slide="4">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 3</div>
+    <div class="question">Do you prefer eating at home or in a restaurant?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      It depends on the occasion. For everyday meals, I definitely prefer eating at home because it's healthier and cheaper — I know exactly what's going into the food. But for special occasions or when I want to try something new, going to a restaurant is great. I think restaurants offer experiences that are hard to replicate at home — the atmosphere, the presentation, and the chance to try cuisines from around the world.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 6: Part 2 Instructions -->
+<div class="slide" data-slide="5">
+  <div class="glow-box part-2">
+    <div class="part-label">&#9670; Part 2 — Long Turn (3-4 min)</div>
+    <p style="font-size:1.05rem;line-height:1.6">You will receive a cue card with a topic. You have 1 minute to prepare, then speak for 1-2 minutes.</p>
+    <p style="margin-top:0.8em;font-size:0.92rem;color:var(--text-muted);line-height:1.5"><strong style="color:var(--cyan);">Tip:</strong> Use all the prompts on the card. Structure your answer: past → present → future. Don't memorise scripted answers — examiners can tell.</p>
+  </div>
+</div>
+
+<!-- Slide 7: Part 2 Cue Card -->
+<div class="slide" data-slide="6">
+  <div class="glow-box part-2">
+    <div class="part-label">&#9670; Part 2 — Cue Card</div>
+    <div class="cue-card">
+      <h4>A Special Meal You Remember</h4>
+      <p style="margin-bottom:0.8em;color:var(--text);line-height:1.5">Describe a special meal you remember. You should say:</p>
+      <ul>
+        <li>What the meal was</li>
+        <li>Where you had it</li>
+        <li>Who you were with</li>
+        <li>Why it was special</li>
+      </ul>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      I'd like to talk about a meal I had last summer at a traditional Heuriger in the Austrian countryside — that's a type of wine tavern you find mainly in Lower Austria. The meal was Tafelspitz, which is boiled beef served with root vegetables, horseradish, and apple sauce.<br><br>I was there with my extended family — my parents, my uncle and aunt, and two cousins — for my grandmother's 80th birthday. The Heuriger was surrounded by vineyards, and we sat outside under the trees with a beautiful view of the rolling hills.<br><br>What made it so special was the atmosphere and the company. My grandmother told stories from her childhood, and we all laughed and shared memories. The food was incredible too — simple but perfectly prepared. It wasn't fancy, but it was authentic and full of love. That's what makes a meal truly memorable for me — not the price or the location, but the people you share it with.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 8: Part 3 Instructions -->
+<div class="slide" data-slide="7">
+  <div class="glow-box part-3">
+    <div class="part-label">&#9670; Part 3 — Discussion (4-5 min)</div>
+    <p style="font-size:1.05rem;line-height:1.6">The examiner asks more abstract, in-depth questions related to the Part 2 topic.</p>
+    <p style="margin-top:0.8em;font-size:0.92rem;color:var(--text-muted);line-height:1.5"><strong style="color:var(--rose);">Tip:</strong> Give balanced opinions. Acknowledge both sides before giving your own view. Use phrases like "On one hand... on the other hand..." or "Some people argue that... but I believe..."</p>
+  </div>
+</div>
+
+<!-- Slide 8: Part 3 Q1 -->
+<div class="slide" data-slide="7">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 1</div>
+    <div class="question">Why do you think food is such an important part of culture?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      Food is central to culture because it brings people together in a way that nothing else can. Think about it — every culture has its own traditional dishes, and these recipes are passed down through generations. Food is how we celebrate, how we comfort each other, and how we express identity. In Austria, for example, our food reflects our history — dishes like Schnitzel and Sachertorte tell a story about who we are and where we come from.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: Part 3 Q2 -->
+<div class="slide" data-slide="8">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 2</div>
+    <div class="question">Is traditional food in your country changing? How?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      Yes, definitely. I think Austrian cuisine is evolving in interesting ways. On one hand, traditional dishes are still very popular — you can't walk through Vienna without seeing Schnitzel or Sachertzel on every menu. But on the other hand, there's been a huge rise in international cuisines — Thai, Japanese, Middle Eastern — and also modern fusion cooking. Young chefs are taking traditional Austrian ingredients and giving them a contemporary twist. I think it's a positive development, as long as we don't lose our culinary heritage entirely.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Part 3 Q3 -->
+<div class="slide" data-slide="9">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 3</div>
+    <div class="question">Do you think people will eat more processed food in the future?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      Unfortunately, I think that's already happening and it will probably continue. Processed food is convenient and cheap, which appeals to people with busy lifestyles. However, I'm hopeful that there will also be a counter-movement — more and more people are becoming aware of the health implications and are choosing organic, local, and seasonal produce. In Austria, we have a strong tradition of quality food, and I think younger generations are becoming more conscious about what they eat. So I think we'll see both trends: more processed food for convenience, but also a growing demand for fresh, high-quality options.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 12: Summary / Exam Tip -->
+<div class="slide" data-slide="11">
+  <div class="glow-box lime">
+    <div class="part-label" style="color:var(--lime);">&#10003; Key Takeaways</div>
+    <ul style="list-style:none;padding:0;line-height:2.2;font-size:1rem;">
+      <li>&#10003; <strong>Part 1:</strong> Extend your answers — give reasons + examples</li>
+      <li>&#10003; <strong>Part 2:</strong> Use all cue card prompts, structure chronologically</li>
+      <li>&#10003; <strong>Part 3:</strong> Balance both sides before giving your opinion</li>
+      <li>&#10003; <strong>Golden rule:</strong> Be specific and personal — avoid generic answers</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="nav-bar">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">&larr; Previous</button>
+  <span class="slide-counter" id="slideCounter">1 / 12</span>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next &rarr;</button>
+</div>
+
+<script>
+let current = 0;
+const total = document.querySelectorAll('.slide').length;
+
+function showSlide(n) {
+  if (n < 0 || n >= total) return;
+  document.querySelectorAll('.slide')[current].classList.remove('active');
+  current = n;
+  document.querySelectorAll('.slide')[current].classList.add('active');
+  document.getElementById('slideCounter').textContent = `${current + 1} / ${total}`;
+  document.getElementById('progressFill').style.width = `${((current + 1) / total) * 100}%`;
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === total - 1;
+}
+
+function changeSlide(dir) {
+  showSlide(current + dir);
+}
+
+function toggleAnswer(btn) {
+  const answer = btn.nextElementSibling;
+  answer.classList.toggle('visible');
+  btn.classList.toggle('revealed');
+  btn.textContent = btn.classList.contains('revealed') ? 'Hide Answer' : 'Show Model Answer';
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+});
+
+// Mark complete on last slide
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (current === total - 1) {
+    const data = JSON.parse(localStorage.getItem('ielts-speaking-progress') || '{}');
+    data['food-cooking'] = { completed: true, date: new Date().toISOString().split('T')[0] };
+    localStorage.setItem('ielts-speaking-progress', JSON.stringify(data));
+  }
+});
+
+// Mark as visited
+(function() {
+  const data = JSON.parse(localStorage.getItem('ielts-speaking-progress') || '{}');
+  if (!data['food-cooking']) {
+    data['food-cooking'] = { completed: false, started: new Date().toISOString().split('T')[0] };
+    localStorage.setItem('ielts-speaking-progress', JSON.stringify(data));
+  }
+})();
+
+showSlide(0);
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
