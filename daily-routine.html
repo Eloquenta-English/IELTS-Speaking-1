@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<title>WTE IELTS Speaking</title>
+<style>
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Inter-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/Inter-Medium.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Inter-SemiBold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/Inter-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/Montserrat-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./fonts/Montserrat-Black.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/Oswald-Medium.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Oswald-SemiBold.woff2') format('woff2');
+  font-display: swap;
+}
+</style>
+<style>
+:root {
+  --bg: #0a1020;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #fbbf24;
+  --cyan: #22d3ee;
+  --lime: #a3e635;
+  --rose: #fb7185;
+  --purple: #a78bfa;
+  --amber: #f59e0b;
+  --teal: #14b8a6;
+  --magenta: #ec4899;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(4vh + 30px) calc(6vw + 30px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  overflow-y: auto;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 2;
+}
+
+.slide:not(.active) * { visibility: hidden !important; }
+
+.slide-bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px);
+  z-index: 0;
+  transition: background-image 0.6s ease;
+}
+
+.slide-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 16, 32, 0.88) 0%, rgba(10, 16, 32, 0.75) 100%);
+  z-index: 1;
+}
+
+.title-slide {
+  justify-content: flex-start;
+  padding-top: calc(5vh + 150px);
+}
+
+.title-box {
+  background: rgba(10, 16, 32, 0.92);
+  border: 2px solid rgba(251, 191, 36, 0.5);
+  border-radius: 18px;
+  padding: 1.5em 3em;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.2), 0 0 60px rgba(34, 211, 238, 0.1);
+  backdrop-filter: blur(8px);
+  margin-bottom: 1.5em;
+}
+
+.title-box h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  background: linear-gradient(135deg, #fbbf24, #f472b6, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-box .level-badge {
+  display: inline-block;
+  margin-top: 0.6em;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.level-b1 { background: rgba(163, 230, 53, 0.2); color: var(--lime); border: 1px solid rgba(163, 230, 53, 0.4); }
+.level-b2 { background: rgba(34, 211, 238, 0.2); color: var(--cyan); border: 1px solid rgba(34, 211, 238, 0.4); }
+
+.subtitle {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 1em;
+}
+
+/* Glow boxes */
+.glow-box {
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 18px;
+  padding: 1.8em 2.4em;
+  max-width: 780px;
+  width: 100%;
+  margin: 0.8em 0;
+  backdrop-filter: blur(8px);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-box.part-1 {
+  border: 2px solid rgba(251, 191, 36, 0.5);
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.25), 0 0 60px rgba(245, 158, 11, 0.12), 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.glow-box.part-2 {
+  border: 2px solid rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.25), 0 0 60px rgba(20, 184, 166, 0.12), 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.glow-box.part-3 {
+  border: 2px solid rgba(251, 113, 133, 0.5);
+  box-shadow: 0 0 30px rgba(251, 113, 133, 0.25), 0 0 60px rgba(236, 72, 153, 0.12), 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.glow-box.lime {
+  border: 2px solid rgba(163, 230, 53, 0.5);
+  box-shadow: 0 0 30px rgba(163, 230, 53, 0.25), 0 0 60px rgba(20, 184, 166, 0.12), 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.part-label {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.6em;
+}
+
+.part-1 .part-label { color: var(--accent); }
+.part-2 .part-label { color: var(--cyan); }
+.part-3 .part-label { color: var(--rose); }
+
+.question {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin-bottom: 0.8em;
+  color: var(--text);
+}
+
+.question-number {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 0.3em;
+}
+
+/* Reveal buttons - highly responsive */
+.reveal-btn {
+  display: inline-block;
+  padding: 10px 24px;
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  margin: 0.6em 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reveal-btn:hover {
+  background: rgba(251, 191, 36, 0.2);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  transform: translateY(-1px);
+}
+
+.reveal-btn:active {
+  transform: scale(0.94);
+  background: rgba(251, 191, 36, 0.3);
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.4);
+  transition: all 0.05s ease;
+}
+
+.reveal-btn.revealed {
+  background: rgba(163, 230, 53, 0.15);
+  border-color: var(--lime);
+  color: var(--lime);
+}
+
+.reveal-btn.revealed:hover {
+  background: rgba(163, 230, 53, 0.25);
+  box-shadow: 0 0 20px rgba(163, 230, 53, 0.3);
+}
+
+.reveal-btn.revealed:active {
+  background: rgba(163, 230, 53, 0.35);
+  box-shadow: 0 0 25px rgba(163, 230, 53, 0.4);
+}
+
+.answer-box {
+  display: none;
+  margin-top: 0.8em;
+  padding: 1em 1.3em;
+  background: rgba(163, 230, 53, 0.08);
+  border: 1px solid rgba(163, 230, 53, 0.25);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #d1fae5;
+}
+
+.answer-box strong {
+  color: var(--lime);
+}
+
+.answer-box.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cue-card {
+  background: rgba(34, 211, 238, 0.08);
+  border: 2px solid rgba(34, 211, 238, 0.4);
+  border-radius: 16px;
+  padding: 1.5em 2em;
+  margin: 1em 0;
+}
+
+.cue-card h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: 0.6em;
+  font-size: 1.1rem;
+}
+
+.cue-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cue-card li {
+  padding: 0.4em 0;
+  padding-left: 1.5em;
+  position: relative;
+  line-height: 1.5;
+}
+
+.cue-card li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8em 2em;
+  background: rgba(10, 16, 32, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+}
+
+.nav-btn {
+  padding: 10px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+  transform: translateY(-1px);
+}
+
+.nav-btn:active:not(:disabled) {
+  transform: scale(0.94);
+  background: rgba(251, 191, 36, 0.15);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  transition: all 0.05s ease;
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.slide-counter {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.progress-bar {
+  position: fixed;
+  bottom: 52px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 10;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+  width: 0%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.home-link {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 20;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: rgba(10, 16, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.1s ease;
+}
+
+.home-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+}
+
+.home-link:active {
+  transform: scale(0.95);
+  transition: all 0.05s ease;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: calc(3vh + 30px) calc(4vw + 30px); }
+  .glow-box { padding: 1.3em 1.5em; }
+  .title-box { padding: 1em 1.5em; }
+  .nav-bar { padding: 0.6em 1em; }
+}
+</style>
+</head>
+<body>
+
+<a class="home-link" href="index.html">&larr; Back to Portal</a>
+
+<div class="slide-bg" id="slideBg" style="background-image: url('https://cdn.pixabay.com/photo/2020/04/01/00/10/676125_1280.jpg')"></div>
+<div class="slide-overlay"></div>
+
+<!-- Slide 1: Title -->
+<div class="slide active" data-slide="0">
+  <div class="title-slide">
+    <div class="title-box">
+      <h1>Daily Routine &amp; Time</h1>
+      <span class="level-badge">IELTS Speaking &mdash; B1</span>
+    </div>
+    <p class="subtitle">Practice all three parts</p>
+  </div>
+</div>
+
+<!-- Slide 2: Part 1 Instructions -->
+<div class="slide" data-slide="1">
+  <div class="glow-box part-1">
+    <div class="part-label">&#9670; Part 1 &mdash; Interview (4-5 min)</div>
+    <p style="font-size:1.05rem;line-height:1.6">The examiner asks general questions about familiar topics: hobbies, daily life, free time activities.</p>
+    <p style="margin-top:0.8em;font-size:0.92rem;color:var(--text-muted);line-height:1.5"><strong style="color:var(--accent);">Tip:</strong> Give extended answers (2-3 sentences), not just &quot;Yes&quot; or &quot;No&quot;. Always give a reason or example.</p>
+  </div>
+</div>
+
+<!-- Slide 3: Part 1 Q1 - keyword: hiking -->
+<div class="slide" data-slide="2">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 1</div>
+    <div class="question">What's your typical daily routine?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      I'm quite a creature of habit. I wake up at 6:30, have a quick breakfast, and then head to work. I'm usually at my desk by 8:00. After work, I either go to the gym or go for a walk, then I cook dinner and spend the evening reading or watching something. I try to be in bed by 10:30 so I get enough sleep.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 4: Part 1 Q2 - keyword: childhood -->
+<div class="slide" data-slide="3">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 2</div>
+    <div class="question">What time of day do you feel most productive?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      Definitely in the morning. I find that my mind is sharpest in the first few hours after I wake up, so I try to tackle the most important tasks early. By the afternoon, my concentration isn't as good, so I save routine tasks for then. I've noticed this about myself over the years, and I've structured my work around it.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Part 1 Q3 - keyword: football -->
+<div class="slide" data-slide="4">
+  <div class="glow-box part-1">
+    <div class="question-number">Question 3</div>
+    <div class="question">Do you ever have trouble sleeping?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      Occasionally, yes. If I've had a stressful day or if I've been looking at screens late at night, I find it hard to switch off. I've developed a bedtime routine that helps — I try to stop using my phone an hour before bed, I make a cup of herbal tea, and I do some light stretching. This usually helps me wind down.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 6: Part 2 Instructions -->
+<div class="slide" data-slide="5">
+  <div class="glow-box part-2">
+    <div class="part-label">&#9670; Part 2 &mdash; Long Turn (3-4 min)</div>
+    <p style="font-size:1.05rem;line-height:1.6">You will receive a cue card with a topic. You have 1 minute to prepare, then speak for 1-2 minutes.</p>
+    <p style="margin-top:0.8em;font-size:0.92rem;color:var(--text-muted);line-height:1.5"><strong style="color:var(--cyan);">Tip:</strong> Use all the prompts on the card. Structure your answer: past &rarr; present &rarr; future. Don't memorise scripted answers — examiners can tell.</p>
+  </div>
+</div>
+
+<!-- Slide 7: Part 2 Cue Card - keyword: guitar -->
+<div class="slide" data-slide="6">
+  <div class="glow-box part-2">
+    <div class="part-label">&#9670; Part 2 &mdash; Cue Card</div>
+    <div class="cue-card">
+      <h4>A Typical Weekend</h4>
+      <p style="margin-bottom:0.8em;color:var(--text);line-height:1.5">Describe what you usually do at the weekend. You should say:</p>
+      <ul>
+        <li>What you do on Saturday</li>
+        <li>What you do on Sunday</li>
+        <li>Who you spend time with</li>
+        <li>And explain how weekends differ from weekdays for you</li>
+      </ul>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      A hobby I really enjoy is playing the guitar. I started learning when I was about 14 — my dad had an old acoustic guitar in the garage and I picked it up one day and taught myself a few chords from YouTube videos.<br><br>
+      These days, I try to practise for at least 30 minutes every evening, and on weekends I sometimes play for two or three hours with a friend who also plays.<br><br>
+      The reason I enjoy it so much is that it's incredibly creative and relaxing at the same time. When I'm playing, I completely switch off from stress — it's almost meditative. Plus, there's a real sense of achievement when you finally nail a song you've been practising for weeks.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 8: Part 3 Instructions -->
+<div class="slide" data-slide="7">
+  <div class="glow-box part-3">
+    <div class="part-label">&#9670; Part 3 &mdash; Discussion (4-5 min)</div>
+    <p style="font-size:1.05rem;line-height:1.6">The examiner asks more abstract, in-depth questions related to the Part 2 topic.</p>
+    <p style="margin-top:0.8em;font-size:0.92rem;color:var(--text-muted);line-height:1.5"><strong style="color:var(--rose);">Tip:</strong> Give balanced opinions. Acknowledge both sides before giving your own view. Use phrases like &quot;On one hand... on the other hand...&quot; or &quot;Some people argue that... but I believe...&quot;</p>
+  </div>
+</div>
+
+<!-- Slide 9: Part 3 Q1 - keyword: exhausted -->
+<div class="slide" data-slide="8">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 1</div>
+    <div class="question">Why do some people struggle with time management?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      I think there are several reasons. Some people underestimate how long tasks will take, so they end up running out of time. Others get easily distracted by their phones or social media. And some people simply don't plan ahead — they react to whatever comes up rather than being proactive. I think the key is having a system — even a simple to-do list can make a big difference.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Part 3 Q2 - keyword: passion -->
+<div class="slide" data-slide="9">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 2</div>
+    <div class="question">Do you think people have more or less free time than in the past?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      It's an interesting question. On one hand, technology has freed up a lot of time — we don't spend hours doing laundry by hand or washing dishes manually. But on the other hand, technology has also created new demands on our time. Emails, notifications, and the expectation of being always available mean that work often bleeds into personal time. I think overall, people feel more time-pressured than ever, even if objectively they might have more free time.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 11: Part 3 Q3 - keyword: addictive -->
+<div class="slide" data-slide="10">
+  <div class="glow-box part-3">
+    <div class="question-number">Question 3</div>
+    <div class="question">How do you think daily routines will change in the future?</div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)">Show Model Answer</button>
+    <div class="answer-box">
+      <strong>Model Answer:</strong><br>
+      I think remote working will become the norm for many people, which will change daily routines significantly. Without a commute, people will have more flexibility in how they structure their day. I also think smart home technology will automate more of our daily tasks — things like grocery ordering, cleaning, and even cooking. This could free up more time for leisure and creativity, or it could just mean we fill that time with more work. It depends on how we choose to use it.
+    </div>
+  </div>
+</div>
+
+<!-- Slide 12: Summary -->
+<div class="slide" data-slide="11">
+  <div class="glow-box lime">
+    <div class="part-label" style="color:var(--lime);">&#10003; Key Takeaways</div>
+    <ul style="list-style:none;padding:0;line-height:2.2;font-size:1rem;">
+      <li>&#10003; <strong>Part 1:</strong> Extend your answers — give reasons + examples</li>
+      <li>&#10003; <strong>Part 2:</strong> Use all cue card prompts, structure chronologically</li>
+      <li>&#10003; <strong>Part 3:</strong> Balance both sides before giving your opinion</li>
+      <li>&#10003; <strong>Golden rule:</strong> Be specific and personal — avoid generic answers</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="nav-bar">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">&larr; Previous</button>
+  <span class="slide-counter" id="slideCounter">1 / 12</span>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next &rarr;</button>
+</div>
+
+<script>
+let current = 0;
+const total = document.querySelectorAll('.slide').length;
+
+const slideImages = [
+  'https://cdn.pixabay.com/photo/2020/04/01/00/10/676125_1280.jpg',
+  'https://cdn.pixabay.com/photo/2016/11/22/23/44/leisure-1870781_1280.jpg',
+  'https://cdn.pixabay.com/photo/2020/04/01/00/10/676125_1280.jpg',
+  'https://cdn.pixabay.com/photo/2016/03/08/09/21/child-1212547_1280.jpg',
+  'https://cdn.pixabay.com/photo/2014/04/23/02/46/soccer-269587_1280.jpg',
+  'https://cdn.pixabay.com/photo/2015/04/19/08/32/guitar-729210_1280.jpg',
+  'https://cdn.pixabay.com/photo/2015/04/19/08/32/guitar-729210_1280.jpg',
+  'https://cdn.pixabay.com/photo/2017/03/04/15/43/man-2250972_1280.jpg',
+  'https://cdn.pixabay.com/photo/2017/03/04/15/43/man-2250972_1280.jpg',
+  'https://cdn.pixabay.com/photo/2017/01/03/02/10/passion-1950498_1280.jpg',
+  'https://cdn.pixabay.com/photo/2015/04/23/22/48/addiction-730250_1280.jpg',
+  'https://cdn.pixabay.com/photo/2016/11/22/23/44/leisure-1870781_1280.jpg'
+];
+
+function showSlide(n) {
+  if (n < 0 || n >= total) return;
+  document.querySelectorAll('.slide')[current].classList.remove('active');
+  current = n;
+  document.querySelectorAll('.slide')[current].classList.add('active');
+  document.getElementById('slideCounter').textContent = `${current + 1} / ${total}`;
+  document.getElementById('progressFill').style.width = `${((current + 1) / total) * 100}%`;
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === total - 1;
+  document.getElementById('slideBg').style.backgroundImage = `url('${slideImages[current]}')`;
+}
+
+function changeSlide(dir) {
+  showSlide(current + dir);
+}
+
+function toggleAnswer(btn) {
+  const answer = btn.nextElementSibling;
+  answer.classList.toggle('visible');
+  btn.classList.toggle('revealed');
+  btn.textContent = btn.classList.contains('revealed') ? 'Hide Answer' : 'Show Model Answer';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (current === total - 1) {
+    const data = JSON.parse(localStorage.getItem('ielts-speaking-progress') || '{}');
+    data['daily-routine'] = { completed: true, date: new Date().toISOString().split('T')[0] };
+    localStorage.setItem('ielts-speaking-progress', JSON.stringify(data));
+  }
+});
+
+(function() {
+  const data = JSON.parse(localStorage.getItem('ielts-speaking-progress') || '{}');
+  if (!data['daily-routine']) {
+    data['daily-routine'] = { completed: false, started: new Date().toISOString().split('T')[0] };
+    localStorage.setItem('ielts-speaking-progress', JSON.stringify(data));
+  }
+})();
+
+showSlide(0);
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
