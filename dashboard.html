@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop - Digital Workshop</title>
+<link rel="manifest" href="manifest-ws.json">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060a14;--bg-card:#0f1521;--border:rgba(255,255,255,.08);--text:#e2e8f0;--cyan:#22d3ee;--purple:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:url('https://cdn.pixabay.com/photo/2017/08/06/09/08/engine-2592313_1280.jpg') center/cover fixed;min-height:100vh;padding:24px;line-height:1.6;overflow-x:hidden}
+.glass{background:rgba(15,21,33,.7);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:16px}
+header{margin-bottom:24px;opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+header.visible{opacity:1;transform:translateY(0)}
+.vehicle-title{font-family:'Montserrat',sans-serif;font-size:1.8rem;font-weight:800;color:var(--cyan);margin-bottom:24px}
+.nav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card.glass{padding:20px;cursor:pointer;transition:all .25s;opacity:0;transform:translateY(30px)}
+.card.glass.visible{opacity:1;transform:translateY(0)}
+.card.glass:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(34,211,238,.2)}
+.card h3{font-size:1.1rem;font-weight:600;margin-bottom:8px}
+.card p{font-size:.85rem;color:#b0bec5}
+@media(max-width:768px){body{padding:16px}.vehicle-title{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<header id="header"><div class="vehicle-title" id="vehicleTitle">Loading...</div></header>
+<div class="nav-grid" id="navGrid">
+  <div class="card glass" onclick="location.href='oil-change.html'"><h3>Oil Change</h3><p>Step-by-step oil change guide.</p></div>
+  <div class="card glass"><h3>Brake Service</h3><p>Brake pad replacement.</p></div>
+  <div class="card glass"><h3>Timing Belt</h3><p>Replacement intervals.</p></div>
+  <div class="card glass"><h3>Torque Specs</h3><p>Fastener specifications.</p></div>
+  <div class="card glass"><h3>Fluids</h3><p>Oil, coolant, brake fluid.</p></div>
+  <div class="card glass"><h3>Service Log</h3><p>Maintenance history.</p></div>
+</div>
+<script>
+(function(){
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw-ws.js'); }
+  var saved = localStorage.getItem('vehicleProfile');
+  if(!saved){ location.href = 'index-ws.html'; return; }
+  var v = JSON.parse(saved);
+  document.getElementById('vehicleTitle').textContent = v.year + ' ' + v.manufacturer + ' ' + v.model + (v.engine ? ' ' + v.engine : '');
+  var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:0.1});
+  document.querySelectorAll('header, .card').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+</body>
+</html>

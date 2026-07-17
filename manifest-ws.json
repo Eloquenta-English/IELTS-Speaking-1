@@ -2,7 +2,7 @@
   "name": "Digital Workshop",
   "short_name": "Workshop",
   "description": "Vehicle repair guides and service tracking",
-  "start_url": "/oil-change.html",
+  "start_url": "/index-ws.html",
   "display": "standalone",
   "background_color": "#060a14",
   "theme_color": "#22d3ee",
