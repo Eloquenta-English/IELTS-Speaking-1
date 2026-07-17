@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://cdn.pixabay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oil Change - Digital Workshop</title>
+<link rel="manifest" href="manifest-ws.json">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060a14;--bg-panel:#0a0e1a;--bg-card:#0f1521;--border:rgba(255,255,255,.08);--text:#e2e8f0;--text-dim:#6b7280;--cyan:#22d3ee;--purple:#a78bfa;--green:#34d399}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:32px;line-height:1.6;overflow-x:hidden}
+.glass{background:rgba(15,21,33,.7);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:16px}
+.header{margin-bottom:32px;opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.header.visible{opacity:1;transform:translateY(0)}
+h1{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;margin-bottom:8px;background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--text-dim);font-size:.95rem;opacity:0;transform:translateY(10px);transition:opacity .6s ease .2s,transform .6s ease .2s}
+.header.visible .subtitle{opacity:1;transform:translateY(0)}
+.steps{display:flex;flex-direction:column;gap:16px}
+.step.glass{padding:20px;cursor:pointer;transition:all .25s;opacity:0;transform:translateY(30px)}
+.step.glass.visible{opacity:1;transform:translateY(0)}
+.step.glass:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(34,211,238,.2)}
+.step.completed{opacity:.6}
+.step h3{font-size:1.1rem;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.step h3 .num{background:var(--cyan);color:var(--bg);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:600}
+.step p{color:var(--text-dim);font-size:.85rem;line-height:1.5}
+.checkbox{color:var(--green);font-size:1.4rem;margin-left:auto;opacity:0;transition:opacity .2s}
+.step.completed .checkbox{opacity:1}
+.specs{font-size:.75rem;color:var(--text-dim);margin-top:4px;padding-left:32px}
+.back{display:inline-block;margin-top:32px;color:var(--cyan);cursor:pointer;font-size:.9rem;opacity:0}
+.back.visible{opacity:1;transition:opacity .6s ease .8s}
+@media(max-width:768px){body{padding:24px}h1{font-size:1.5rem}}
+@media(max-width:480px){.step.glass{padding:16px}}
+</style>
+</head>
+<body>
+<div class="header" id="header">
+  <h1>Oil Change</h1>
+  <p class="subtitle">Basic guide • ~30 minutes • Basic tools required</p>
+</div>
+<div class="steps" id="steps">
+  <div class="step glass"><h3><span class="num">1</span>Warm the engine<span class="checkbox">&#10003;</span></h3><p>Run for 5 minutes to thin oil for easier drainage.</p></div>
+  <div class="step glass"><h3><span class="num">2</span>Drain oil<span class="checkbox">&#10003;</span></h3><p>Remove drain plug. Torque: 35 Nm. Collect in pan.</p><p class="specs">Oil capacity: 4.2L • Drain plug: 17mm hex</p></div>
+  <div class="step glass"><h3><span class="num">3</span>Replace filter<span class="checkbox">&#10003;</span></h3><p>Lubricate new filter gasket with fresh oil. Hand-tighten + 3/4 turn.</p><p class="specs">Filter: Toyota 90917-03004 or equivalent • 76mm wrench</p></div>
+  <div class="step glass"><h3><span class="num">4</span>Refill oil<span class="checkbox">&#10003;</span></h3><p>Pour new oil. Check level with dipstick after 5 minutes.</p><p class="specs">Recommended: 5W-30 synthetic • ~4.2L</p></div>
+  <div class="step glass"><h3><span class="num">5</span>Reset reminder<span class="checkbox">&#10003;</span></h3><p>Clear service indicator. Log date and mileage.</p></div>
+</div>
+<div class="back" id="back" onclick="location.href='dashboard.html'">&larr; Back to Workshop</div>
+<script>
+(function(){
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw-ws.js'); }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.1});
+  document.querySelectorAll('.header, .step, .back').forEach(function(el){ obs.observe(el); });
+  var completed = JSON.parse(localStorage.getItem('oilChangeComplete')||'{}');
+  document.querySelectorAll('.step').forEach(function(s,i){ if(completed[i]) s.classList.add('completed'); });
+})();
+document.querySelectorAll('.step').forEach(function(s){ s.addEventListener('click',function(){
+  this.classList.toggle('completed');
+  var completed = {};
+  document.querySelectorAll('.step').forEach(function(s,i){
+    if(s.classList.contains('completed')) completed[i]=true;
+  });
+  localStorage.setItem('oilChangeComplete', JSON.stringify(completed));
+}); });
+</script>
+</body>
+</html>
